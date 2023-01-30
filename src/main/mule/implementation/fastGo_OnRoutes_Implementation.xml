@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="fastGo_OnRoutes_ImplementationSub_Flow" doc:id="2af736d1-4ed5-4296-9a82-1e57b4f40271" >
+		<db:select doc:name="Select routes for fastGo system" doc:id="b934ebd5-9e67-436e-9423-728732f7215f" config-ref="Database_Config" >
+			<db:sql ><![CDATA[select * from routes where companyname = 'fastGo']]></db:sql>
+		</db:select>
+		<ee:transform doc:name="Transform response from  db message" doc:id="d3bdd985-6cb4-47dd-9d18-d4fa160b7833" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>
