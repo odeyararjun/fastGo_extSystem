@@ -1,6 +1,6 @@
 http:
  listener:
-  host: "localhost"
+  host: "0.0.0.0"
   port: "9082"
   path: "/fastGoCall/{ServiceType}"
 
@@ -12,5 +12,4 @@ db:
    password:  "orcl"
    instance:  ""
    service: "orcl"
-   
-      
+     

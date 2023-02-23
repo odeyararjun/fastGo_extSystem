@@ -6,25 +6,14 @@
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
 	<flow name="fastgo_extsystemFlow" doc:id="be7806e1-4529-487f-bb45-db2c1ef0a52a" >
-		<http:listener doc:name="Listener" doc:id="1675f3c4-a6fd-4e6f-bcbb-8f2a67ae3556" config-ref="HTTP_Listener_config" path="${http.listener.path}"/>
+		<http:listener doc:name="Listener" doc:id="1675f3c4-a6fd-4e6f-bcbb-8f2a67ae3556" config-ref="HTTP_Listener_config" allowedMethods="GET" responseStreamingMode="ALWAYS" path="${http.listener.path}"/>
 		<logger level="INFO" doc:name="Logger" doc:id="70d31fbd-8dc2-4406-a73f-6605b76d2433" message="Request Recived for fastGo external system TransactionId: #[attributes.headers.transactionId]"/>
 		<ee:transform doc:name="Transform Message" doc:id="407787e0-6e5d-4655-816e-d08a3d7443dc" >
 			<ee:message >
-				<ee:set-payload ><![CDATA[%dw 2.0
-output application/json
----
-{
-}]]></ee:set-payload>
 			</ee:message>
 			<ee:variables >
-				<ee:set-variable variableName="ServiceType" ><![CDATA[%dw 2.0
-output application/json
----
-attributes.uriParams.ServiceType]]></ee:set-variable>
-				<ee:set-variable variableName="transactionId" ><![CDATA[%dw 2.0
-output application/json
----
-attributes.headers.transactionId]]></ee:set-variable>
+				<ee:set-variable variableName="ServiceType" ><![CDATA[attributes.uriParams.ServiceType]]></ee:set-variable>
+				<ee:set-variable variableName="transactionId" ><![CDATA[attributes.headers.transactionId]]></ee:set-variable>
 			</ee:variables>
 		</ee:transform>
 		<choice doc:name="Choice" doc:id="75e5ba0f-bb17-4a79-a44b-06102f6f3542" >

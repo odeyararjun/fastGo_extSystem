@@ -113,4 +113,5 @@ type auto_b9bd2b9b_2219_4e09_93b0_c740909ad072_Output_Variables_transactionId = 
       </types:output-event>
     </types:processor-declaration>
   </types:enrichment>
+  <types:enrichment select="#407787e0-6e5d-4655-816e-d08a3d7443dc"/>
 </types:mule>
